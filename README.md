@@ -9,9 +9,11 @@ Claude subscription**. There's nothing to install, no terminal, no account to cr
 beyond the Claude subscription you already have. You set it up once from this page.
 
 ## What you need
-- A **Claude Pro or Max** subscription (custom Skills + file creation require Pro/Max).
-- File creation / code execution enabled in Claude (it's on by default for most Pro/Max
-  accounts).
+- A **Claude account** with **file creation / code execution** enabled (Settings →
+  Features). This is available on Free, Pro, and Max plans.
+- The ability to add a custom **Skill** in Settings. If your account doesn't show the
+  Skills upload option, you may need to be on **Pro or Max** — the rest of the steps are
+  the same.
 
 ## Set it up (about 3 minutes, no technical skills needed)
 See **[SETUP.md](SETUP.md)** for step-by-step instructions with the exact clicks.

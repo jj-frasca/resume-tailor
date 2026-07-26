@@ -1,6 +1,6 @@
 ---
 name: resume-tailor
-description: Build a tailored, one-page, ATS-safe, human-sounding resume for the current user from a job posting (URL or pasted text), using only facts the user supplies and confirms. First run collects the user's career facts from an uploaded resume; later runs generate a tailored one-page PDF per job. Use when the user asks to tailor, build, or customize a resume for a specific role, or to set up their resume profile. Never invents experience.
+description: Build a tailored, one-page, ATS-safe resume from a job posting, using only facts the user confirms; never invents experience. Use to build, tailor, or set up a resume for a specific job.
 ---
 
 # resume-tailor
@@ -99,9 +99,12 @@ Use the helper, resolving its path from THIS skill's own directory (the folder c
 `python <skill-dir>/scripts/render_pdf.py <filled.html> <out.pdf>`.
 It must print `PAGES: 1` (exit 0) before you treat the PDF as done. Any other result means
 NOT done: more than one page or an unverified page count (exit 2) → cut the weakest content
-and re-render; no PDF library available (exit 3) → fall back to delivering the polished
-one-page HTML for the user to open and Print → Save as PDF (Letter); input-not-found
-(exit 1) → check the path. Never claim a one-page PDF you did not verify.
+and re-render; no PDF library available (exit 3) → run `pip install xhtml2pdf pypdf` (this
+sandbox can reach PyPI by default) and re-run the script; if that install is blocked (no
+network), either produce the one-page PDF with your own built-in file-creation from the
+filled HTML, or fall back to delivering the polished one-page HTML for the user to open and
+Print → Save as PDF (Letter); input-not-found (exit 1) → check the path. Whichever path you
+use, still confirm the result is exactly one page. Never claim a one-page PDF you did not verify.
 
 ### Step 6 — Report honestly
 Give the user a short summary:

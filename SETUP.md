@@ -5,8 +5,11 @@ article on custom Skills is here:
 https://support.claude.com/en/articles/12512198-creating-custom-skills
 
 ## Before you start
-- You need a **Claude Pro or Max** subscription. (The free plan can't upload Skills.)
+- You need a **Claude account** with **file creation** turned on (Settings → Features →
+  enable code execution / file creation). This works on Free, Pro, and Max.
 - You'll do everything at **https://claude.ai** in a web browser. No app to install.
+- If your account doesn't offer the "Upload skill" option, you may need **Pro or Max** —
+  everything else is identical.
 
 ## Step 1 — Download the skill file
 1. Click this link: **[⬇ resume-tailor.zip](https://github.com/jj-frasca/resume-tailor/raw/master/dist/resume-tailor.zip)**.
@@ -54,8 +57,8 @@ Drive, you simply get the PDF (and an HTML copy), which is all most people need.
   if a job needs something you're missing, it tells you instead of faking it.
 - To reuse your profile in a fresh chat, upload the `profile.json` file Claude gave you
   during setup, or just re-run "Help me set up my resume profile."
-- If the upload button isn't there, make sure you're on **Pro or Max** and that
-  **file creation** is enabled in Settings → Features.
+- If the upload button isn't there, make sure **file creation** is enabled in Settings →
+  Features. If it still isn't offered on your plan, upgrading to **Pro or Max** unlocks it.
 
 ## If PDF download doesn't work
 Rarely, Claude's environment can't build the PDF directly. If that happens, it will give
