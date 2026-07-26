@@ -1,0 +1,85 @@
+<!--
+  One-page, ATS-safe resume template. Single column. The ONLY tables are borderless
+  one-row, two-cell HEADER rows (label left / location-or-date right) — this is a
+  deliberate, ATS-safe exception so right-alignment survives every PDF renderer,
+  including the pure-Python fallback. The body (bullets, skills) stays plain <ul>/<p>.
+  Fill the {{PLACEHOLDERS}} from the confirmed profile, then render to an exactly-one-page
+  PDF (scripts/render_pdf.py). If content overflows, cut bullets — never shrink below 10pt.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{NAME}} — Resume</title>
+<style>
+  @page { size: Letter; margin: 0.6in; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: Calibri, Arial, "Helvetica Neue", sans-serif; /* one font throughout */
+    font-size: 10.5pt; line-height: 1.16; color: #000; margin: 0;
+    -webkit-print-color-adjust: exact;
+  }
+  h1 { font-size: 19pt; text-align: center; margin: 0 0 2pt; letter-spacing: .3px; }
+  .contact { text-align: center; font-size: 10pt; margin: 0 0 8pt; }
+  .contact a { color: #000; text-decoration: none; }
+  h2 { font-size: 11pt; text-transform: uppercase; letter-spacing: .5px;
+       border-bottom: 1px solid #000; padding-bottom: 1pt; margin: 8pt 0 3pt; }
+  .summary { margin: 0 0 6pt; }
+  .entry { margin-bottom: 5pt; }
+  /* Header rows: borderless 2-cell table = right-alignment in every renderer */
+  table.hdr { width: 100%; border-collapse: collapse; margin: 0; }
+  table.hdr td { border: 0; padding: 0; vertical-align: bottom; }
+  td.l { text-align: left; }
+  td.l b { font-weight: 700; }
+  td.r { text-align: right; white-space: nowrap; padding-left: 12px; }
+  .subrow td { font-style: italic; }
+  ul { margin: 2pt 0 0; padding-left: 16px; }
+  li { margin: 0 0 2pt; }
+  .skills p { margin: 1pt 0; }
+  html, body { height: auto; }
+</style>
+</head>
+<body>
+  <h1>{{NAME}}</h1>
+  <!-- CONTACT LINE: build it from ONLY the fields the profile actually has. Join present
+       items with " | ". Drop any missing piece (no empty {{PHONE}}, no dangling " | ").
+       Links come from profile.identity.links — emit only the ones present (linkedin,
+       github, portfolio, ...), each as <a href="https://REAL_URL">label</a>. NEVER emit an
+       empty href like href="https://". -->
+  <div class="contact">{{CONTACT_LINE}}</div>
+
+  <!-- Optional summary: include only if it earns its line -->
+  <!-- <p class="summary">{{SUMMARY}}</p> -->
+
+  <h2>Experience</h2>
+  <!-- repeat .entry per role. {{TITLE}} = role.title_override if present, else role.title.
+       {{DATES}} = "Mon. YYYY - Present" when role.is_current, else "Mon. YYYY - Mon. YYYY". -->
+  <div class="entry">
+    <table class="hdr"><tr><td class="l"><b>{{COMPANY}}</b></td><td class="r" align="right">{{CITY}}</td></tr></table>
+    <table class="hdr subrow"><tr><td class="l">{{TITLE}}</td><td class="r" align="right">{{DATES}}</td></tr></table>
+    <ul>
+      <li>{{BULLET}}</li>
+    </ul>
+  </div>
+
+  <h2>Projects</h2>
+  <!-- {{STACK}} = the project's tech list (project.tech), joined with ", "; omit " | {{STACK}}"
+       if the project has none. {{LINK_OR_DATE}} = the project link, or its date if no link. -->
+  <div class="entry">
+    <table class="hdr"><tr><td class="l"><b>{{PROJECT}}</b> | {{STACK}}</td><td class="r" align="right">{{LINK_OR_DATE}}</td></tr></table>
+    <ul><li>{{BULLET}}</li></ul>
+  </div>
+
+  <h2>Technical Skills</h2>
+  <div class="skills">
+    <p><b>Languages:</b> {{LANGS}}</p>
+    <p><b>{{SKILL_GROUP}}:</b> {{SKILLS}}</p>
+  </div>
+
+  <h2>Education</h2>
+  <div class="entry">
+    <table class="hdr"><tr><td class="l"><b>{{SCHOOL}}</b></td><td class="r" align="right">{{SCHOOL_CITY}}</td></tr></table>
+    <table class="hdr subrow"><tr><td class="l">{{DEGREE}}</td><td class="r" align="right">{{EDU_DATES}}</td></tr></table>
+    <div>{{EDU_DETAIL}}</div>
+  </div>
+</body>
+</html>

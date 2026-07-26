@@ -1,0 +1,10 @@
+# Never commit anyone's actual career data
+profile.json
+*_profile.json
+outputs/
+*.pdf
+
+# OS / editor cruft
+.DS_Store
+__pycache__/
+*.pyc
